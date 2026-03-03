@@ -55,9 +55,9 @@ function startCountdown() {
     }
 
     targetDate = new Date(`${dateVal}T${timeVal}:00`);
-    startDate = new Date();
+    startDate = new Date('2026-02-28T00:00:00');
 
-    if (targetDate <= startDate) {
+    if (targetDate <= new Date()) {
         shakeElement(dateInput);
         return;
     }
@@ -102,9 +102,9 @@ function updateTimer() {
     animateValue(minutesEl, pad(mins));
     animateValue(secondsEl, pad(secs));
 
-    // Update progress
-    const elapsed = totalDuration - diff;
-    const percent = Math.min((elapsed / totalDuration) * 100, 100);
+    // Update progress (from fixed origin date of 2/28/2026)
+    const elapsed = now - startDate;
+    const percent = Math.min(Math.max((elapsed / totalDuration) * 100, 0), 100);
     progressFill.style.width = `${percent}%`;
 }
 
