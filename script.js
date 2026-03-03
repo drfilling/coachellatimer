@@ -204,6 +204,32 @@ dateInput.addEventListener('keydown', e => { if (e.key === 'Enter') startCountdo
 timeInput.addEventListener('keydown', e => { if (e.key === 'Enter') startCountdown(); });
 
 // ═══════════════════════════════════════════
+// Music Toggle (YouTube iframe)
+// ═══════════════════════════════════════════
+const musicToggle = document.getElementById('music-toggle');
+const ytPlayer = document.getElementById('yt-player');
+const musicIconOn = document.getElementById('music-icon-on');
+const musicIconOff = document.getElementById('music-icon-off');
+let isMuted = false;
+
+musicToggle.classList.add('playing');
+
+musicToggle.addEventListener('click', () => {
+    isMuted = !isMuted;
+    if (isMuted) {
+        ytPlayer.contentWindow.postMessage('{"event":"command","func":"mute","args":""}', '*');
+        musicIconOn.style.display = 'none';
+        musicIconOff.style.display = 'block';
+        musicToggle.classList.remove('playing');
+    } else {
+        ytPlayer.contentWindow.postMessage('{"event":"command","func":"unMute","args":""}', '*');
+        musicIconOn.style.display = 'block';
+        musicIconOff.style.display = 'none';
+        musicToggle.classList.add('playing');
+    }
+});
+
+// ═══════════════════════════════════════════
 // Init
 // ═══════════════════════════════════════════
 init();
