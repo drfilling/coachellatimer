@@ -55,9 +55,9 @@ function startCountdown() {
     }
 
     targetDate = new Date(`${dateVal}T${timeVal}:00`);
-    startDate = new Date();
+    startDate = new Date('2026-02-28T00:00:00');
 
-    if (targetDate <= startDate) {
+    if (targetDate <= new Date()) {
         shakeElement(dateInput);
         return;
     }
@@ -102,9 +102,9 @@ function updateTimer() {
     animateValue(minutesEl, pad(mins));
     animateValue(secondsEl, pad(secs));
 
-    // Update progress
-    const elapsed = totalDuration - diff;
-    const percent = Math.min((elapsed / totalDuration) * 100, 100);
+    // Update progress (from fixed origin date of 2/28/2026)
+    const elapsed = now - startDate;
+    const percent = Math.min(Math.max((elapsed / totalDuration) * 100, 0), 100);
     progressFill.style.width = `${percent}%`;
 }
 
@@ -202,6 +202,32 @@ presetBtns.forEach(btn => {
 // Allow Enter key to start
 dateInput.addEventListener('keydown', e => { if (e.key === 'Enter') startCountdown(); });
 timeInput.addEventListener('keydown', e => { if (e.key === 'Enter') startCountdown(); });
+
+// ═══════════════════════════════════════════
+// Music Toggle (YouTube iframe)
+// ═══════════════════════════════════════════
+const musicToggle = document.getElementById('music-toggle');
+const ytPlayer = document.getElementById('yt-player');
+const musicIconOn = document.getElementById('music-icon-on');
+const musicIconOff = document.getElementById('music-icon-off');
+let isMuted = false;
+
+musicToggle.classList.add('playing');
+
+musicToggle.addEventListener('click', () => {
+    isMuted = !isMuted;
+    if (isMuted) {
+        ytPlayer.contentWindow.postMessage('{"event":"command","func":"mute","args":""}', '*');
+        musicIconOn.style.display = 'none';
+        musicIconOff.style.display = 'block';
+        musicToggle.classList.remove('playing');
+    } else {
+        ytPlayer.contentWindow.postMessage('{"event":"command","func":"unMute","args":""}', '*');
+        musicIconOn.style.display = 'block';
+        musicIconOff.style.display = 'none';
+        musicToggle.classList.add('playing');
+    }
+});
 
 // ═══════════════════════════════════════════
 // Init
