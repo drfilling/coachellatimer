@@ -232,4 +232,4 @@ musicToggle.addEventListener('click', () => {
 // ═══════════════════════════════════════════
 // Init
 // ═══════════════════════════════════════════
-init();
+document.addEventListener('DOMContentLoaded', init);
