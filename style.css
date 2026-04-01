@@ -456,6 +456,134 @@ input[type="time"]::-webkit-calendar-picker-indicator {
 }
 
 /* ═══════════════════════════════════════════
+   Weather Widget
+   ═══════════════════════════════════════════ */
+.weather-widget {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.2rem 1.5rem;
+    margin-top: 1.5rem;
+    min-height: 72px;
+    animation: fadeSlideUp 0.6s ease-out 0.3s both;
+}
+
+.weather-loading {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    color: var(--text-secondary);
+    font-size: 0.88rem;
+}
+
+.weather-spinner {
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(255,255,255,0.1);
+    border-top-color: var(--accent-2);
+    border-radius: 50%;
+    display: inline-block;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.weather-days {
+    width: 100%;
+}
+
+.weather-day-label {
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+}
+
+.weather-days-grid {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.weather-day-card {
+    flex: 1;
+    min-width: 120px;
+    max-width: 160px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 0.8rem 0.5rem;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: var(--radius-sm);
+    transition: background 0.3s;
+}
+
+.weather-day-card:hover {
+    background: rgba(255,255,255,0.06);
+}
+
+.weather-day-name {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--text-secondary);
+}
+
+.weather-day-icon {
+    font-size: 1.8rem;
+    line-height: 1;
+    margin: 0.2rem 0;
+}
+
+.weather-day-condition {
+    font-size: 0.78rem;
+    color: var(--text-primary);
+    font-weight: 500;
+    text-align: center;
+}
+
+.weather-day-temps {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    margin-top: 0.2rem;
+}
+
+.day-temp-high {
+    font-family: var(--font-mono);
+    font-size: 1rem;
+    font-weight: 700;
+    background: var(--gradient-glow);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.day-temp-sep {
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+}
+
+.day-temp-low {
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.weather-error {
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+}
+
+/* ═══════════════════════════════════════════
    Finished Message
    ═══════════════════════════════════════════ */
 .finished-message {

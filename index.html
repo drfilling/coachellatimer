@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="A beautiful countdown timer with days, hours, minutes, and seconds">
-    <title>Coachella Timer</title>
+    <title>Coachella</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -45,7 +45,7 @@
     </div>
 
     <main class="container">
-        <h1 class="title">Coachella <span class="accent">Timer</span></h1>
+        <h1 class="title">Coachella</h1>
 
         <div class="input-section glass-card">
             <div class="input-row">
@@ -103,6 +103,19 @@
                     <div class="progress-fill" id="progress-fill"></div>
                 </div>
                 <p class="event-label" id="event-label"></p>
+            </div>
+
+            <div id="weather-widget" class="weather-widget glass-card">
+                <div class="weather-loading" id="weather-loading">
+                    <span class="weather-spinner"></span> Fetching forecast…
+                </div>
+                <div class="weather-days hidden" id="weather-content">
+                    <div class="weather-day-label">🌵 Indio, CA Weekend Forecast</div>
+                    <div class="weather-days-grid" id="weather-days-grid">
+                        <!-- Filled by JS -->
+                    </div>
+                </div>
+                <div class="weather-error hidden" id="weather-error">⚠️ Forecast unavailable</div>
             </div>
 
             <div class="controls">
