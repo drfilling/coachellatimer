@@ -230,6 +230,76 @@ musicToggle.addEventListener('click', () => {
 });
 
 // ═══════════════════════════════════════════
+// Weather Forecast (Open-Meteo, no API key)
+// ═══════════════════════════════════════════
+function getWeatherInfo(code) {
+    if (code === 0)                       return { icon: '☀️',  label: 'Clear Sky' };
+    if (code <= 2)                        return { icon: '🌤️',  label: 'Partly Cloudy' };
+    if (code === 3)                       return { icon: '☁️',  label: 'Overcast' };
+    if (code <= 48)                       return { icon: '🌫️',  label: 'Foggy' };
+    if (code <= 55)                       return { icon: '🌦️',  label: 'Drizzle' };
+    if (code <= 65)                       return { icon: '🌧️',  label: 'Rain' };
+    if (code <= 75)                       return { icon: '❄️',  label: 'Snow' };
+    if (code <= 82)                       return { icon: '🌦️',  label: 'Rain Showers' };
+    if (code <= 86)                       return { icon: '🌨️',  label: 'Snow Showers' };
+    return                                       { icon: '⛈️',  label: 'Thunderstorm' };
+}
+
+async function fetchWeather() {
+    const days = [
+        { date: '2026-04-10', name: 'Fri' },
+        { date: '2026-04-11', name: 'Sat' },
+        { date: '2026-04-12', name: 'Sun' },
+    ];
+
+    const startDate = days[0].date;
+    const endDate   = days[days.length - 1].date;
+
+    const url = `https://api.open-meteo.com/v1/forecast?latitude=33.7206&longitude=-116.2156` +
+        `&daily=temperature_2m_max,temperature_2m_min,weathercode` +
+        `&temperature_unit=fahrenheit&timezone=America%2FLos_Angeles` +
+        `&start_date=${startDate}&end_date=${endDate}`;
+
+    try {
+        const res  = await fetch(url);
+        const data = await res.json();
+
+        const grid = document.getElementById('weather-days-grid');
+        grid.innerHTML = '';
+
+        days.forEach((day, i) => {
+            const code = data.daily.weathercode[i];
+            const high = Math.round(data.daily.temperature_2m_max[i]);
+            const low  = Math.round(data.daily.temperature_2m_min[i]);
+            const { icon, label } = getWeatherInfo(code);
+
+            const card = document.createElement('div');
+            card.className = 'weather-day-card';
+            card.innerHTML = `
+                <div class="weather-day-name">${day.name}</div>
+                <div class="weather-day-icon">${icon}</div>
+                <div class="weather-day-condition">${label}</div>
+                <div class="weather-day-temps">
+                    <span class="day-temp-high">${high}°</span>
+                    <span class="day-temp-sep">/</span>
+                    <span class="day-temp-low">${low}°</span>
+                </div>
+            `;
+            grid.appendChild(card);
+        });
+
+        document.getElementById('weather-loading').classList.add('hidden');
+        document.getElementById('weather-content').classList.remove('hidden');
+    } catch (e) {
+        document.getElementById('weather-loading').classList.add('hidden');
+        document.getElementById('weather-error').classList.remove('hidden');
+    }
+}
+
+// ═══════════════════════════════════════════
 // Init
 // ═══════════════════════════════════════════
-document.addEventListener('DOMContentLoaded', init);
+document.addEventListener('DOMContentLoaded', () => {
+    init();
+    fetchWeather();
+});
