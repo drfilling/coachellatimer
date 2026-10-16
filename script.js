@@ -30,8 +30,8 @@ let totalDuration = 0;
 // Initialize — set default date to tomorrow
 // ═══════════════════════════════════════════
 function init() {
-    dateInput.value = '2026-04-09';
-    timeInput.value = '12:00';
+    dateInput.value = '2026-10-31';
+    timeInput.value = '17:00';
     startCountdown();
 }
 
