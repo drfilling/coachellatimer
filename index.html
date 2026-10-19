@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="A beautiful countdown timer with days, hours, minutes, and seconds">
-    <title>Coachella Timer</title>
+    <title>Countdown to Prydz</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -17,7 +17,7 @@
 <body>
     <!-- Hidden YouTube embed for background music -->
     <iframe id="yt-player"
-        src="https://www.youtube.com/embed/S85q2xSpwUI?autoplay=1&loop=1&playlist=S85q2xSpwUI&controls=0&showinfo=0&mute=0&enablejsapi=1"
+        src="https://www.youtube.com/embed/yOLd4jl0uQ8?autoplay=1&loop=1&playlist=yOLd4jl0uQ8&controls=0&showinfo=0&mute=0&enablejsapi=1"
         allow="autoplay; encrypted-media" style="position:absolute;width:0;height:0;border:none;overflow:hidden;"
         title="Background Music"></iframe>
 
@@ -45,7 +45,7 @@
     </div>
 
     <main class="container">
-        <h1 class="title">Coachella <span class="accent">Timer</span></h1>
+        <h1 class="title">Countdown to <span class="accent">Prydz</span></h1>
 
         <div class="input-section glass-card">
             <div class="input-row">
@@ -81,19 +81,16 @@
                     <span class="timer-label">Days</span>
                     <div class="card-glow"></div>
                 </div>
-                <div class="timer-separator">:</div>
                 <div class="timer-card glass-card">
                     <span class="timer-value" id="hours">00</span>
                     <span class="timer-label">Hours</span>
                     <div class="card-glow"></div>
                 </div>
-                <div class="timer-separator">:</div>
                 <div class="timer-card glass-card">
                     <span class="timer-value" id="minutes">00</span>
                     <span class="timer-label">Minutes</span>
                     <div class="card-glow"></div>
                 </div>
-                <div class="timer-separator">:</div>
                 <div class="timer-card glass-card">
                     <span class="timer-value" id="seconds">00</span>
                     <span class="timer-label">Seconds</span>
@@ -106,6 +103,19 @@
                     <div class="progress-fill" id="progress-fill"></div>
                 </div>
                 <p class="event-label" id="event-label"></p>
+            </div>
+
+            <div id="weather-widget" class="weather-widget glass-card">
+                <div class="weather-loading" id="weather-loading">
+                    <span class="weather-spinner"></span> Fetching forecast…
+                </div>
+                <div class="weather-days hidden" id="weather-content">
+                    <div class="weather-day-label">🌵 Indio, CA Weekend Forecast</div>
+                    <div class="weather-days-grid" id="weather-days-grid">
+                        <!-- Filled by JS -->
+                    </div>
+                </div>
+                <div class="weather-error hidden" id="weather-error">⚠️ Forecast unavailable</div>
             </div>
 
             <div class="controls">
